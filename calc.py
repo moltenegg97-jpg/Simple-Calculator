@@ -134,32 +134,12 @@ def clear_number(): #очищает строку дисплей
 
 def calculate(letter): #высчитывает мат.формулу на дисплее
     global some_number
-
-    
-
-    # first_char = letter[0] #для того чтобы убрать 0 в начале строки, но не работает
-    # special_letter=letter[1]
-
-    # i=0
-    # while i<len(letter):
-    #     if letter[i] == '0': 
-    #         print ('0 is detected')
-
-    #         if first_char == '0' :
-    #             for j in range(len(letter)):
-    #                 print (f'print letter[i] {letter[i]}')
-    #                 if letter[j] == '0': 
-    #                     continue
-    #                 else: 
-    #                     notazero=j 
-    #                     print (f'not a zero {notazero}')
-    #                     letter=letter[notazero:]
-    #                     print (f'letter after deleted zeros {letter}')
-    #                     break
-    # i+=1    
-
-    some_number=f'{eval(letter)}' #eval -функция расчета строки
-    NumberText.set(some_number)
+    try: 
+        some_number=f'{eval(letter)}' #eval -функция расчета строки
+        NumberText.set(some_number)
+    except ZeroDivisionError:
+        some_number = 'деление на ноль не возможно'
+        NumberText.set(some_number)
     return
 
 window=tk.Tk() #создает окно window
