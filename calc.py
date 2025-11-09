@@ -17,7 +17,8 @@ def enter_number(letter, last_number): #выводит знаки на дисп�
         NumberText.set(some_number)
         print(f"some number:{some_number}")
         print(f"Last number after:{last_number}")
-    elif last_number[0] == '0':
+        return
+    if last_number[0] == '0' and len(last_number) == 1:
         print ('выполняю ф2')
         print(f"Текст кнопки: {letter}")
         print(f"Last number before:{last_number}")
@@ -26,8 +27,8 @@ def enter_number(letter, last_number): #выводит знаки на дисп�
         NumberText.set(some_number)
         print(f"some number:{some_number}")
         print(f"Last number after:{last_number}")
-
-    elif last_number[0] != '0' and len(last_number) != 0 and len(last_number) <2:
+        return
+    if last_number[0] != '0' and len(last_number) != 0 and len(last_number) <2:
         print ('выполняю ф3')
         print(f"Текст кнопки: {letter}")
         print(f"Last number before:{last_number}")
@@ -36,7 +37,8 @@ def enter_number(letter, last_number): #выводит знаки на дисп�
         NumberText.set(some_number)
         print(f"some number:{some_number}")
         print(f"Last number after:{last_number}")
-    elif len(last_number) >= 2:
+        return
+    if len(last_number) >= 2:
         print ('больше 2')
         if last_number[-2] == '+' and last_number[-1] == '0':
             print ('выполняю ф4')
@@ -49,7 +51,8 @@ def enter_number(letter, last_number): #выводит знаки на дисп�
             NumberText.set(some_number)
             print(f"some number:{some_number}")
             print(f"Last number after:{last_number}")
-        elif last_number[0] != '0' and len(last_number) != 0 and (last_number[-2] != '+' or last_number[-2] != '0'):
+            return
+        if last_number[0] != '0' and len(last_number) != 0 and (last_number[-2] != '+' or last_number[-2] != '0'):
             print ('выполняю ф3.5')
             print(f"Текст кнопки: {letter}")
             print(f"Last number before:{last_number}")
@@ -58,9 +61,19 @@ def enter_number(letter, last_number): #выводит знаки на дисп�
             NumberText.set(some_number)
             print(f"some number:{some_number}")
             print(f"Last number after:{last_number}")
+            return
+    print ('без особых условий')
+    print(f"Текст кнопки: {letter}")
+    print(f"Last number before:{last_number}")
+    some_number=last_number+letter
+    last_number=some_number
+    NumberText.set(some_number)
+    print(f"some number:{some_number}")
+    print(f"Last number after:{last_number}")
     return 
 
 def enter_special_symbol(letter, last_number):
+    global some_number
     special_symbols = ['+', '-', '*', '/']
     if len(last_number) > 0:
         if last_number[0] in special_symbols:
@@ -72,15 +85,27 @@ def enter_special_symbol(letter, last_number):
             NumberText.set(some_number)
             print(f"some number:{some_number}")
             print(f"Last number after:{last_number}")
-        else:
-            print ('выполняю ф1')
+            return
+        elif last_number[-1] in special_symbols:
+            print ('выполняю ф5')
             print(f"Текст кнопки: {letter}")
             print(f"Last number before:{last_number}")
-            some_number=last_number+letter
+            some_number=last_number[:-1]+letter
             last_number=some_number
             NumberText.set(some_number)
             print(f"some number:{some_number}")
             print(f"Last number after:{last_number}")
+            return
+            
+        print ('выполняю ф1')
+        print(f"Текст кнопки: {letter}")
+        print(f"Last number before:{last_number}")
+        some_number=last_number+letter
+        last_number=some_number
+        NumberText.set(some_number)
+        print(f"some number:{some_number}")
+        print(f"Last number after:{last_number}")
+    return
 
 def clear_number(): #очищает строку дисплей
     global some_number
