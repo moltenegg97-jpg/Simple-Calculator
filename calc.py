@@ -60,6 +60,28 @@ def enter_number(letter, last_number): #выводит знаки на дисп�
             print(f"Last number after:{last_number}")
     return 
 
+def enter_special_symbol(letter, last_number):
+    special_symbols = ['+', '-', '*', '/']
+    if len(last_number) > 0:
+        if last_number[0] in special_symbols:
+            print ('выполняю ф2')
+            print(f"Текст кнопки: {letter}")
+            print(f"Last number before:{last_number}")
+            some_number=letter
+            last_number=some_number
+            NumberText.set(some_number)
+            print(f"some number:{some_number}")
+            print(f"Last number after:{last_number}")
+        else:
+            print ('выполняю ф1')
+            print(f"Текст кнопки: {letter}")
+            print(f"Last number before:{last_number}")
+            some_number=last_number+letter
+            last_number=some_number
+            NumberText.set(some_number)
+            print(f"some number:{some_number}")
+            print(f"Last number after:{last_number}")
+
 def clear_number(): #очищает строку дисплей
     global some_number
     some_number=''
@@ -93,11 +115,9 @@ def calculate(letter): #высчитывает мат.формулу на дис
     #                     break
     # i+=1    
 
-
     some_number=f'{eval(letter)}' #eval -функция расчета строки
     NumberText.set(some_number)
     return
-
 
 window=tk.Tk() #создает окно window
 window.title('main window') #прописывает окну Имя main window
@@ -142,10 +162,10 @@ ttk.Button(frame2, text='.',command=lambda: enter_number('.', some_number)).grid
 ttk.Button(frame2, text='0', command=lambda: enter_number('0', some_number)).grid(column=2, row=8, sticky=NSEW)
 ttk.Button(frame2, text='clear', command=lambda: clear_number()).grid(column=3, row=8, sticky=NSEW)  #кнопка =
 
-ttk.Button(frame2, text='+', command=lambda: enter_number('+', some_number)).grid(column=4,row=8, sticky=NSEW) #кнопки +,-,/,*
-ttk.Button(frame2, text='-', command=lambda: enter_number('-', some_number)).grid(column=4,row=7, sticky=NSEW)
-ttk.Button(frame2, text='*', command=lambda: enter_number('*', some_number)).grid(column=4,row=6, sticky=NSEW)
-ttk.Button(frame2, text='/', command=lambda: enter_number('/', some_number)).grid(column=4,row=5, sticky=NSEW)
+ttk.Button(frame2, text='+', command=lambda: enter_special_symbol('+', some_number)).grid(column=4,row=8, sticky=NSEW) #кнопки +,-,/,*
+ttk.Button(frame2, text='-', command=lambda: enter_special_symbol('-', some_number)).grid(column=4,row=7, sticky=NSEW)
+ttk.Button(frame2, text='*', command=lambda: enter_special_symbol('*', some_number)).grid(column=4,row=6, sticky=NSEW)
+ttk.Button(frame2, text='/', command=lambda: enter_special_symbol('/', some_number)).grid(column=4,row=5, sticky=NSEW)
 
 ttk.Button(frame2, text='=', command=lambda: calculate(some_number)).grid(column=4,row=9, sticky=NSEW) #кнопка =
 
