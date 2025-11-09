@@ -7,7 +7,7 @@ some_number=''
 
 def enter_number(letter, last_number): #выводит знаки на дисплей
     global some_number
-
+    special_symbols = ['+', '-', '*', '/']
     if len(last_number) == 0:
         print ('выполняю ф1')
         print(f"Текст кнопки: {letter}")
@@ -40,7 +40,7 @@ def enter_number(letter, last_number): #выводит знаки на дисп�
         return
     if len(last_number) >= 2:
         print ('больше 2')
-        if last_number[-2] == '+' and last_number[-1] == '0':
+        if last_number[-2] in special_symbols and last_number[-1] == '0':
             print ('выполняю ф4')
             print(f"Последний символ: {last_number[-1]}")
             print(f"Текст кнопки: {letter}")
@@ -52,7 +52,7 @@ def enter_number(letter, last_number): #выводит знаки на дисп�
             print(f"some number:{some_number}")
             print(f"Last number after:{last_number}")
             return
-        if last_number[0] != '0' and len(last_number) != 0 and (last_number[-2] != '+' or last_number[-2] != '0'):
+        if last_number[0] != '0' and len(last_number) != 0 and (last_number[-2] not in special_symbols or last_number[-2] != '0'):
             print ('выполняю ф3.5')
             print(f"Текст кнопки: {letter}")
             print(f"Last number before:{last_number}")
