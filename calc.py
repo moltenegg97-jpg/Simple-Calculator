@@ -1,4 +1,5 @@
 import tkinter as tk
+import re
 from tkinter import *
 from tkinter import ttk
 
@@ -52,7 +53,7 @@ def enter_number(letter, last_number): #выводит знаки на дисп�
             print(f"some number:{some_number}")
             print(f"Last number after:{last_number}")
             return
-        if last_number[0] != '0' and len(last_number) != 0 and (last_number[-2] not in special_symbols or last_number[-2] != '0'):
+        if last_number[0] != '0' and len(last_number) != 0 and (last_number[-2] not in special_symbols or last_number[-2] != '0'): #Изучить потом возможно уже бесполезна
             print ('выполняю ф3.5')
             print(f"Текст кнопки: {letter}")
             print(f"Last number before:{last_number}")
@@ -106,6 +107,23 @@ def enter_special_symbol(letter, last_number):
         print(f"some number:{some_number}")
         print(f"Last number after:{last_number}")
     return
+def enter_comma(letter, last_number):
+    global some_number
+
+    divided_list = re.split(r'[+\-\*\/]', some_number)
+    print (f'new test list: {divided_list}')
+    if '.' in divided_list[-1]:
+        print ('нашел точку')
+        return
+    if divided_list[-1] == '':
+        some_number = last_number + '0'+ letter
+        last_number=some_number
+        NumberText.set(some_number)
+        return
+    some_number = last_number+letter
+    last_number=some_number
+    NumberText.set(some_number)
+    
 
 def clear_number(): #очищает строку дисплей
     global some_number
@@ -182,7 +200,7 @@ ttk.Button(frame2, text='7',command=lambda: enter_number('7', some_number)).grid
 ttk.Button(frame2, text='8',command=lambda: enter_number('8', some_number)).grid(column=2, row=5, sticky=NSEW)
 ttk.Button(frame2, text='9',command=lambda: enter_number('9', some_number)).grid(column=3, row=5, sticky=NSEW)
 
-ttk.Button(frame2, text='.',command=lambda: enter_number('.', some_number)).grid(column=1, row=8, sticky=NSEW)
+ttk.Button(frame2, text='.',command=lambda: enter_comma('.', some_number)).grid(column=1, row=8, sticky=NSEW)
 
 ttk.Button(frame2, text='0', command=lambda: enter_number('0', some_number)).grid(column=2, row=8, sticky=NSEW)
 ttk.Button(frame2, text='clear', command=lambda: clear_number()).grid(column=3, row=8, sticky=NSEW)  #кнопка =
